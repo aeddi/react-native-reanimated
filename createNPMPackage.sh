@@ -6,9 +6,9 @@ ROOT=$(pwd)
 
 unset CI
 
-versions=("0.66.3" "0.65.2" "0.64.2")
-rnv8_versions=("0.66.3-patch.1" "v0.65.2-patch.1" "0.64.2-patch.1")
-version_name=("66" "65" "64")
+versions=("0.67.2" "0.66.3" "0.65.1" "0.64.2" "0.63.3")
+rnv8_versions=("0.67.2-patch.0" "0.66.3-patch.1" "v0.65.2-patch.1" "0.64.2-patch.1" "0.63.3-patch.0" )
+version_name=("67" "66" "65" "64" "63")
 
 for index in {0..2}
 do
@@ -22,7 +22,7 @@ do
       cp -Rf node_modules/react-native-v8/src/v8runtime node_modules/react-native/ReactCommon/jsi/jsi/
     fi
 
-    cd android 
+    cd android
 
     echo "APPLY PATCH"
     versionNumber=${version_name[$index]}
@@ -30,7 +30,7 @@ do
     rm -rf ../backup/*
     cp -r . ../backup
     if [ "$(find . | grep 'java')" ];
-    then 
+    then
       fileList=$(find . | grep -i 'java')
       for file in $fileList; do
         echo "COPY: $file"
@@ -49,7 +49,7 @@ do
 
     cd ./rnVersionPatch/$versionNumber
     if [ $(find . | grep 'java') ];
-    then 
+    then
       echo "RESTORE BACKUP"
       for file in $fileList; do
         echo "BACKUP: $file"
@@ -77,12 +77,12 @@ cd libSo
 mkdir fbjni
 cd fbjni
 wget https://repo1.maven.org/maven2/com/facebook/fbjni/fbjni/0.2.2/fbjni-0.2.2.aar
-unzip fbjni-0.2.2.aar 
+unzip fbjni-0.2.2.aar
 rm -r $(find . ! -name '.' ! -name 'jni' -maxdepth 1)
 rm $(find . -name '*libc++_shared.so')
 cd ../..
 
-yarn add react-native@0.67.0-rc.4 --dev
+yarn add react-native@0.67.2 --dev
 
 mv android android-temp
 mv android-npm android
