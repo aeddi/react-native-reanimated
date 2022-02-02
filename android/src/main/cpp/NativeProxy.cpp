@@ -124,8 +124,10 @@ void NativeProxy::installJSIBindings() {
   };
 
 #if JS_RUNTIME_HERMES
+  auto config = ::hermes::vm::RuntimeConfig::Builder()
+          .withEnableSampleProfiling(false);
   std::shared_ptr<jsi::Runtime> animatedRuntime =
-      facebook::hermes::makeHermesRuntime();
+      facebook::hermes::makeHermesRuntime(config.build());
 #elif JS_RUNTIME_V8
   #if REACT_NATIVE_TARGET_VERSION >= 65
     V8RuntimeConfig *config = new V8RuntimeConfig();
