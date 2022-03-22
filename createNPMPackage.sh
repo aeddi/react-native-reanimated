@@ -10,7 +10,7 @@ versions=("0.67.2" "0.66.3" "0.65.1" "0.64.2" "0.63.3")
 rnv8_versions=("0.67.2-patch.0" "0.66.3-patch.1" "v0.65.2-patch.1" "0.64.2-patch.1" "0.63.3-patch.0" )
 version_name=("67" "66" "65" "64" "63")
 
-for index in {0..2}
+for index in {0..4}
 do
   yarn add react-native@"${versions[$index]}"
   for js_runtime in "hermes" "jsc" "v8"
